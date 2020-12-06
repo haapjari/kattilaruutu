@@ -1,0 +1,12 @@
+{
+  "name": "logo-cache",
+  "version": "1.0.0",
+  "description": "Cache sponsor logos from linkkijkl.fi",
+  "main": "index.js",
+  "author": "Karri Kuivanen",
+  "license": "WTFPL",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "node-fetch": "^2.2.0"
+  }
+}

@@ -1,0 +1,328 @@
+$bgColor: #000;
+$mainColor: #ffbf00;
+$fonts: IBM_VGA8, 'Hack', monospace;
+
+$sdwGlow: inset 0 0 5vw rgba(255,191,0, 0.5);
+
+$sbLeft: inset 0.4vw 0 0 0 $mainColor;
+$sbRight: inset -0.4vw 0 0 0 $mainColor;
+$sbTop: inset 0 0.4vw 0 0 $mainColor;
+$sbBottom: inset 0 -0.4vw 0 0 $mainColor;
+
+body {
+  font-family: $fonts;
+  margin: 0;
+  padding: 0;
+  background: $bgColor;
+}
+
+#root {
+  height: 100vh;
+  background: $mainColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#App {
+  position: absolute;
+  background: $mainColor;
+  height: 99.2vh;
+  width: 99.2vw;
+  display: grid;
+  grid-template-columns: 8fr 4fr;
+  grid-template-rows: repeat(12, 1fr);
+  grid-gap: 0.8vh 0.4vw;
+}
+
+#events {
+  padding: 2vh;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+
+  text-shadow: 0 0 1vw rgba(0, 0, 0, 0.9);
+
+  color: $mainColor;
+  background: $bgColor;
+  background-image: url('img/linkki_bg.png');
+  background-size: 110vh;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  line-height: 6vh;
+  font-size: 6vh;
+
+  grid-row: 1 / 12;
+  grid-column: 1 / 1;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  h2 {
+    font-weight: normal;
+    font-size: 6vh;
+
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2vh;
+  }
+}
+
+#App:after {
+  content:"";
+  position:absolute;
+  right:0;
+  top: 0;
+  height:100%;
+  width:100%;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.2) 50%, rgba(0,0,0,0));
+  background-position: center 20%;
+  background-size: 100% 12vh ;
+  animation: scanlines 30s linear infinite;
+}
+
+#sponsorsLogos:after {
+  content:"";
+  position:absolute;
+  right:0;
+  top: 0;
+  height:100%;
+  width:100%;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4) 50%, rgba(0,0,0,0));
+  background-position: center 20%;
+  background-size: 100% 0.5vh;
+}
+
+#kamera:after {
+  content:"";
+  position:absolute;
+  right:0;
+  top: 0;
+  height:100%;
+  width:100%;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.25) 50%, rgba(0,0,0,0));
+  background-position: center 20%;
+  background-size: 100% 0.5vh ;
+}
+
+#events:after {
+  content:"";
+  position:absolute;
+  right:0;
+  top: 0;
+  height:100%;
+  width:10vw;
+  background: linear-gradient(90deg, rgba(0,0,0,0), $bgColor);
+  background-position: center;
+  background-size: 100% calc(100% - 0.8vw);
+  background-repeat: no-repeat;
+}
+
+#kamera {
+  animation: grain 0.5s steps(1) infinite;
+  background-color: $bgColor;
+  position: absolute;
+
+  color: $mainColor;
+  font-size: 4.5vh;
+
+  width: 100%;
+  height: 100%;
+
+  background-size: cover;
+  background-repeat: repeat, no-repeat;
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  grid-row: 1 / 6;
+  grid-column: 2 / 2;
+
+  #kkLabelContainer {
+    width: 100%;
+    height: 100%;
+    line-height: 3vh;
+    padding: 0.5vw;
+  }
+  #kkCaption {
+    text-shadow: 0.1vw 0.1vw 0.2vw rgba(0,0,0, 0.5);
+    grid-row: 2;
+    grid-column: 2;
+    margin-right: 0.4vw;
+
+    align-self: end;
+    justify-self: end;
+
+    height: 1em;
+    opacity: 0.7;
+  }
+  #kkRec {
+    grid-row: 1;
+    grid-column: 1;
+
+    height: 2vw;
+    width: 2vw;
+    background-color: #ee2222;
+    border-radius: 50%;
+    display: inline-block;
+
+    margin: 1vw;
+    opacity: 0.9;
+    animation: blink 1.5s steps(2) infinite;
+  }
+}
+
+@keyframes grain {
+  0%, 100% { background-position: 0 0,        center center }
+  10%      { background-position: -5vw -10vw, center center }
+  20%      { background-position: -15vw 5vw,  center center }
+  30%      { background-position: 7vw -25vw,  center center }
+  40%      { background-position: -5vw 25vw,  center center }
+  50%      { background-position: -15vw 10vw, center center }
+  60%      { background-position: 15vw 0vw,   center center }
+  70%      { background-position: 0vw 15vw,   center center }
+  80%      { background-position: 3vw 35vw,   center center }
+  90%      { background-position: -10vw 10vw, center center }
+}
+
+#meals {
+  background: $bgColor;
+  white-space: nowrap;
+  overflow: hidden;
+
+  font-size: 4.5vh;
+
+  display: flex;
+  align-items: center;
+
+  grid-row: 12 / 12;
+  grid-column: 1 / 1;
+
+  #mealsContent {
+    padding-left: 1.4vw;
+    display: inline-block;
+    color: $mainColor;
+    pre { font-family: $fonts; }
+  }
+}
+
+@keyframes marquee {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-100%, 0); }
+}
+
+#sponsors {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: $bgColor;
+  color: $mainColor;
+  text-align: center;
+
+  grid-row: 6 / 13;
+  grid-column: 2 / 2;
+}
+
+#sponsors h2 {
+  color: $mainColor;
+
+  font-weight: normal;
+  font-size: 4vh;
+}
+
+#sponsorsLogos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 65%;
+}
+
+#sponsors img {
+  position: absolute;
+  filter: grayscale(100%) invert(100%) sepia(100%);
+
+  max-height: 60%;
+  max-width: 60%;
+}
+
+@keyframes scanlines {
+  0%   { background-position: center 0vh }
+  100% { background-position: center 96vh }
+}
+
+@keyframes blink {
+  0%   { opacity: 0 }
+  100% { opacity: unset }
+}
+
+@media screen and (orientation: portrait) {
+  #App {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(12, 1fr);
+  }
+  #events {
+    line-height: 3vh;
+    font-size: 3vh;
+    grid-row: 1 / 10;
+    grid-column: 1 / 3;
+  }
+  #events h2 {
+    font-weight: normal;
+    font-size: 3vh;
+
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2vh;
+  }
+  #kamera {
+    grid-row: 10 / 12;
+    grid-column: 1/1;
+  }
+  #sponsors {
+    grid-row: 10 / 12;
+    grid-column: 2/2;
+  }
+  #meals {
+    grid-row: 12 / 12;
+    grid-column: 1 / 3;
+  }
+  #sponsors h2 {
+    margin: 0;
+    font-size: 2vh;
+  }
+  #sponsors img {
+    margin: 0;
+    padding: 0;
+    max-height: 3.5vh;
+  }
+  #kamera {
+    font-size: 2.5vh;
+  }
+  .b-all {
+    box-shadow:
+    inset 0 0 5vw rgba(255,191,0, 0.5),
+    inset 0 0 0 0.4vw $mainColor;
+  }
+  .b-lrb {
+    box-shadow:
+    inset 0 0 5vw rgba(255,191,0, 0.5),
+    inset 0 0 0 0.4vw $mainColor;
+  }
+  .b-rtb {
+    box-shadow:
+    inset 0 0 5vw rgba(255,191,0, 0.5),
+    inset 0 0 0 0.4vw $mainColor;
+  }
+  .b-rt {
+    box-shadow:
+    inset 0 0 5vw rgba(255,191,0, 0.5),
+    inset 0 0 0 0.4vw $mainColor;
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "linkki-link",
+  "version": "0.0.1",
+  "description": "Linkki Jyväskylä ry Events Screen",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node --no-warnings scripts/deploy.js"
+  },
+  "author": "Karri Kuivanen",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.318.0",
+    "cfbuild": "^1.1.2",
+    "cfn-deploy": "^0.10.1",
+    "ora": "^3.0.0"
+  }
+}

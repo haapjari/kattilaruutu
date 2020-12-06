@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Linkki JKL Event Screen
+
+Parameters:
+  Env:
+    Type: String
+    Default: dev
+    AllowedValues: [ dev, prod ]
+
+Globals:
+  Function:
+    Runtime: nodejs10.x
+    Timeout: 60
+    Handler: index.handler
+
+Mappings:
+  EnvMap:
+    dev:
+      ApiDomain: api-dev.linkki.link
+    prod:
+      ApiDomain: api.linkki.link
+
+Resources:
+
+  # S3
+  SourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Fn::Sub: 'linkki-link-source-${Env}'
+  WebAppBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Fn::Sub: 'linkki-link-app-${Env}'
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+  KahvikameraBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Fn::Sub: 'linkki-link-kahvikamera-${Env}'
+  LogoCacheBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Fn::Sub: 'linkki-link-logocache-${Env}'
+
+  # Lambda
+  DataFetcherLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: 'linkki-link-datafetcher-${Env}'
+      AutoPublishAlias: live
+      CodeUri: ./build/datafetcher.zip
+  LogoCacheLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: 'linkki-link-logocache-${Env}'
+      AutoPublishAlias: live
+      CodeUri: ./build/logo-cache.zip
+      Policies:
+        - S3CrudPolicy:
+            BucketName:
+              Fn::Sub: 'linkki-link-logocache-${Env}'
+
+  # API Gateway
+  LinkkiLinkApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      DefinitionBody: !include ./api-swagger.yaml
+      Name:
+        Fn::Sub: 'linkki-link-api-${Env}'
+      StageName:
+        Ref: Env
+      EndpointConfiguration: REGIONAL
+  LinkkiLinkApiMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    Properties:
+      DomainName:
+        Fn::FindInMap: [ EnvMap, Ref: Env, ApiDomain ]
+      RestApiId:
+        Ref: LinkkiLinkApi
+      Stage:
+        Ref: LinkkiLinkApi.Stage

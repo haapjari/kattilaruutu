@@ -1,0 +1,15 @@
+{
+  "name": "datafetcher",
+  "version": "1.0.0",
+  "description": "Lambda for aggregating information from various sources for linkki.link",
+  "main": "index.js",
+  "author": "kamiheku",
+  "license": "WTFPL",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "ical": "^0.5.0",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.21",
+    "node-fetch": "^2.2.0"
+  }
+}
